@@ -1,0 +1,24 @@
+# Git
+.git
+.gitignore
+
+# Docker
+docker-compose.yml
+.docker
+
+# Python
+*.pyc
+__pycache__
+
+# Translations
+*.mo
+*.pot
+
+# Django stuff:
+*.log
+
+# Exlude the Postgres data dir
+data
+
+# JetBrains
+.idea

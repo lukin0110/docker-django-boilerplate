@@ -1,0 +1,30 @@
+# PostgreSQL
+postgres:
+    image: postgres:9.6.0
+    ports:
+      - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      - LC_ALL=C.UTF-8
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_USER=docker
+
+# Django app
+app:
+    build: .
+    command: dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./hello:/usr/src/app
+    links:
+      - postgres:postgres
+    environment:
+      - DEBUG=True
+      - POSTGRES_DB_NAME=hello
+      - POSTGRES_PORT_5432_TCP_PORT=5432
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - PGPASSWORD=docker
+      - SECRET_KEY=JeffreyLebowski

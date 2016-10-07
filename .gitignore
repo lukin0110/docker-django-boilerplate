@@ -88,4 +88,8 @@ ENV/
 # Rope project settings
 .ropeproject
 
+# JetBrains
 .idea
+
+# PostreSQL Data
+data
