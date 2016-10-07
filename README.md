@@ -31,13 +31,10 @@ $ docker-compose up app
 
 * [Docker Hub Python](https://hub.docker.com/_/python/)
 * [Docker Hub Postgres](https://hub.docker.com/_/postgres/)
-* [Docker compose Postgres environment variables](http://stackoverflow.com/questions/29580798/docker-compose-environment-variables )
+* [Docker compose Postgres environment variables](http://stackoverflow.com/questions/29580798/docker-compose-environment-variables)
 * [Quickstart: Docker Compose and Django](https://docs.docker.com/compose/django/)
 
- - explain: gitignore, pypi, docker tips
     
-    
-
 # License
 
     Copyright 2016 Maarten Huijsmans
