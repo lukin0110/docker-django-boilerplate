@@ -1,12 +1,12 @@
 # Docker Django Boilerplate
 
-Sample setup for a Django project with Docker. Basic skeleton code to 
-get up and running with Docker & Django quickly. The image uses 
-[uWSGI](https://uwsgi-docs.readthedocs.io/) to host the Django project.
-It's up to you to put Nginx or Apache in front in production. This setup 
-is sufficient to get started with development. 
+Sample setup for a Django project with Docker. This repo contains 
+minimal skeleton code to get up and running with Docker & Django 
+quickly. The image uses [uWSGI](https://uwsgi-docs.readthedocs.io/) to 
+host the Django project. It's up to you to put Nginx or Apache in front 
+in production.  
 
-The image contains the *hello* django project. Replace the word *hello*
+The image contains the *hello* Django project. Replace the word *hello*
 with the name of your project.
 
 ## Usage
