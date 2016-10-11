@@ -8,14 +8,14 @@ Usage: docker run <imagename> COMMAND
 
 Commands
 
-dev      : Start a normal Django development server.
+dev      : Start a normal Django development server
 bash     : Start a bash shell
 manage   : Start manage.py
 setup_db : Setup the initial database. Configure \$POSTGRES_DB_NAME in docker-compose.yml
 lint     : Run pylint
 python   : Run a python command
-shell    : Start a Django Python shell.
-uwsgi    : Run uwsgi server.
+shell    : Start a Django Python shell
+uwsgi    : Run uwsgi server
 help     : Show this message
 """
 }
@@ -28,7 +28,7 @@ help     : Show this message
 # Run
 case "$1" in
     dev)
-        echo "Running Development Server..."
+        echo "Running Development Server on 0.0.0.0:${PORT}"
         python manage.py runserver 0.0.0.0:${PORT}
     ;;
     bash)

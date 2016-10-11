@@ -1,6 +1,13 @@
 # Docker Django Boilerplate
 
-Sample setup for a Django project with Docker. 
+Sample setup for a Django project with Docker. Basic skeleton code to 
+get up and running with Docker & Django quickly. The image uses 
+[uWSGI](https://uwsgi-docs.readthedocs.io/) to host the Django project.
+It's up to you to put Nginx or Apache in front in production. This setup 
+is sufficient to get started with development. 
+
+The image contains the *hello* django project. Replace the word *hello*
+with the name of your project.
 
 ## Usage
 
@@ -26,6 +33,34 @@ Launch:
 $ docker-compose up app
 ```
 
+## Container commands
+
+The image has 
+
+Run a command:
+```
+$ docker-compose run app <command>
+```
+
+Available commands:
+
+| Command   | Description                                                                     |
+|-----------|---------------------------------------------------------------------------------|
+| dev       | Start a normal Django development server                                        |
+| bash      | Start a bash shell                                                              |
+| manage    | Start manage.py                                                                 |
+| setup_db  | Setup the initial database. Configure *$POSTGRES_DB_NAME* in docker-compose.yml |
+| lint      | Run pylint                                                                      |
+| python    | Run a python command                                                            |
+| shell     | Start a Django Python shell                                                     |
+| uwsgi     | un uwsgi server                                                                 |
+| help      | Show this message                                                               |
+
+### Create a Django app
+
+```
+$ docker-compose run app manage startapp myapp
+```
 
 ## Useful links
 
@@ -33,20 +68,3 @@ $ docker-compose up app
 * [Docker Hub Postgres](https://hub.docker.com/_/postgres/)
 * [Docker compose Postgres environment variables](http://stackoverflow.com/questions/29580798/docker-compose-environment-variables)
 * [Quickstart: Docker Compose and Django](https://docs.docker.com/compose/django/)
-
-    
-# License
-
-    Copyright 2016 Maarten Huijsmans
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.

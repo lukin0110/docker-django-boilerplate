@@ -93,3 +93,5 @@ ENV/
 
 # PostreSQL Data
 data
+pgdata
+
