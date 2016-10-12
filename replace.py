@@ -43,5 +43,5 @@ def handle(project_name):
     os.rename("app/hello", "app/{0}".format(project_name))
 
 if __name__ == "__main__":
-    name = input("Project name: ")
+    name = raw_input("Project name: ")
     handle(name)
