@@ -1,18 +1,11 @@
 #
-# Sample Docker image for a Django project
+# Minimal Docker image for a Django project
 #
 FROM python:3.5
 
 # Ensure that Python outputs everything that's printed inside
 # the application rather than buffering it.
 ENV PYTHONUNBUFFERED 1
-
-# Used by docker-entrypoint.sh to start the dev server
-# If not configured you'll receive this: CommandError: "0.0.0.0:" is not a valid port number or address:port pair.
-ENV PORT 8000
-# Expose the runtime port
-EXPOSE 8000
-# Keep both ports the same
 
 # Install the PostgreSQL client
 RUN apt-get update && \
@@ -22,6 +15,10 @@ RUN apt-get update && \
 
 # Set the default workdir
 WORKDIR /usr/src/app
+
+# Used by docker-entrypoint.sh to start the dev server
+# If not configured you'll receive this: CommandError: "0.0.0.0:" is not a valid port number or address:port pair.
+ENV PORT 8000
 
 # Install the requirements
 COPY deployment/requirements.txt ./
