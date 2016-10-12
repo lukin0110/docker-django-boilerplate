@@ -6,7 +6,7 @@ few files.
 import os
 
 
-def replace(file: str, old: str, new: str):
+def replace(file, old, new):
     with open(file) as f:
         new_text = f.read().replace(old, new)
 
@@ -14,29 +14,34 @@ def replace(file: str, old: str, new: str):
         f.write(new_text)
 
 
-def handle(name: str):
+def handle(project_name):
     replace("docker-compose.yml",
             "POSTGRES_DB_NAME=hello",
-            "POSTGRES_DB_NAME={0}".format(name))
+            "POSTGRES_DB_NAME={0}".format(project_name))
+
+    replace("app/manage.py",
+            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hello.settings")',
+            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")'.format(project_name))
 
     replace("app/hello/settings.py",
             "ROOT_URLCONF = 'hello.urls'",
-            "ROOT_URLCONF = '{0}.urls'".format(name))
+            "ROOT_URLCONF = '{0}.urls'".format(project_name))
 
     replace("app/hello/settings.py",
             "WSGI_APPLICATION = 'hello.wsgi.application'",
-            "WSGI_APPLICATION = '{0}.wsgi.application'".format(name))
+            "WSGI_APPLICATION = '{0}.wsgi.application'".format(project_name))
 
     replace("app/hello/wsgi.py",
             'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hello.settings")',
-            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")'.format(name))
+            'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")'.format(project_name))
 
     replace("deployment/uwsgi.ini",
             "module=hello.wsgi:application",
-            "module={0}.wsgi:application".format(name))
+            "module={0}.wsgi:application".format(project_name))
 
     # Rename the 'hello' dir to 'your_project'
-    os.rename("app/hello", "app/{0}".format(name))
+    os.rename("app/hello", "app/{0}".format(project_name))
 
-name = input("Project name: ")
-handle(name)
+if __name__ == "__main__":
+    name = input("Project name: ")
+    handle(name)
