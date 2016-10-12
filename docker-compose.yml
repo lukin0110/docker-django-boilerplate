@@ -17,7 +17,7 @@ app:
     ports:
       - 8000:8000
     volumes:
-      - ./hello:/usr/src/app
+      - ./app:/usr/src/app
     links:
       - postgres:postgres
     environment:

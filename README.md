@@ -6,8 +6,8 @@ image uses [uWSGI](https://uwsgi-docs.readthedocs.io/) to host the
 Django project. It's up to you to put Nginx or Apache in front in 
 production.  
 
-The image contains the *hello* Django project. Replace the word *hello*
-with the name of your project.
+The image contains the *hello* Django project. 
+[Replace the word *hello* with the name of *your project*](docs/rename.md).
 
 ## Usage
 
@@ -53,13 +53,18 @@ Available commands:
 | lint      | Run pylint                                                                      |
 | python    | Run a python command                                                            |
 | shell     | Start a Django Python shell                                                     |
-| uwsgi     | un uwsgi server                                                                 |
+| uwsgi     | Run uwsgi server                                                                 |
 | help      | Show this message                                                               |
 
 ### Create a Django app
 
 ```
 $ docker-compose run app manage startapp myapp
+```
+
+### Create a super user
+```
+$ docker-compose run app manage createsuperuser
 ```
 
 ## Useful links

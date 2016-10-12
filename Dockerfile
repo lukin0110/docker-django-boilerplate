@@ -31,7 +31,7 @@ COPY deployment/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 # Add the project source
-COPY hello .
+COPY app .
 
 RUN ./manage.py collectstatic --noinput
 
