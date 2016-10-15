@@ -47,14 +47,3 @@ to:
 ```
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mars.settings")
 ```
-
-## in deployment/uwsgi.ini
-
-Change:
-```
-module=hello.wsgi:application
-```
-to:
-```
-module=mars.wsgi:application
-```

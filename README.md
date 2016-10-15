@@ -6,7 +6,9 @@ image uses [uWSGI](https://uwsgi-docs.readthedocs.io/) to host the
 Django project. It's up to you to put Nginx or Apache in front in 
 production.  
 
-The image contains the *hello* Django project. 
+This image is **not intended** as being a base image for a Django project.
+It's a boilerplate, you can copy/paste this and use it as a base to 
+start a project. The image contains the *hello* Django project. 
 [Replace the word *hello* with the name of *your project*](docs/rename.md).
 
 ## Usage
