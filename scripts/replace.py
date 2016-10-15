@@ -35,10 +35,6 @@ def handle(project_name):
             'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "hello.settings")',
             'os.environ.setdefault("DJANGO_SETTINGS_MODULE", "{0}.settings")'.format(project_name))
 
-    replace("deployment/uwsgi.ini",
-            "module=hello.wsgi:application",
-            "module={0}.wsgi:application".format(project_name))
-
     # Rename the 'hello' dir to 'your_project'
     os.rename("app/hello", "app/{0}".format(project_name))
 

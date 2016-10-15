@@ -16,16 +16,10 @@ RUN apt-get update && \
 # Set the default workdir
 WORKDIR /usr/src/app
 
-# Used by docker-entrypoint.sh to start the dev server
-# If not configured you'll receive this: CommandError: "0.0.0.0:" is not a valid port number or address:port pair.
-ENV PORT 8000
-
-# Install the requirements
-COPY deployment/requirements.txt ./
-RUN pip install -r requirements.txt
-
-# Add uwsgi.ini file to the root. The entrypoint starts uwsgi from the root
-COPY deployment/uwsgi.ini /
+# Copy deployment files
+# Adding requirements.txt & uwsgi.ini
+COPY deployment/requirements.txt deployment/uwsgi.ini /deployment/
+RUN pip install -r /deployment/requirements.txt
 
 # Add the entrypoint.sh
 COPY deployment/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh

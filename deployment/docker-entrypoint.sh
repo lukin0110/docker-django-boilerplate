@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e
 
+# Check if the required PostgreSQL environment variables are set
+
+# Used by docker-entrypoint.sh to start the dev server
+# If not configured you'll receive this: CommandError: "0.0.0.0:" is not a valid port number or address:port pair.
+[ -z "$PORT" ] && echo "ERROR: Need to set PORT. E.g.: 8000" && exit 1;
+
+[ -z "$POSTGRES_DB_NAME" ] && echo "ERROR: Need to set POSTGRES_DB_NAME" && exit 1;
+[ -z "$POSTGRES_USER" ] && echo "ERROR: Need to set POSTGRES_USER" && exit 1;
+[ -z "$POSTGRES_PASSWORD" ] && echo "ERROR: Need to set POSTGRES_PASSWORD" && exit 1;
+
+# Used by uwsgi.ini file to start the wsgi Django application
+[ -z "$WSGI_MODULE" ] && echo "ERROR: Need to set WSGI_MODULE. E.g.: hello.wsgi:application" && exit 1;
+
+
 # Define help message
 show_help() {
     echo """
@@ -20,10 +34,15 @@ help     : Show this message
 """
 }
 
-# Check if the required PostgreSQL environment variables are set
-[ -z "$POSTGRES_DB_NAME" ] && echo "ERROR: Need to set POSTGRES_DB_NAME" && exit 1;
-[ -z "$POSTGRES_USER" ] && echo "ERROR: Need to set POSTGRES_USER" && exit 1;
-[ -z "$POSTGRES_PASSWORD" ] && echo "ERROR: Need to set POSTGRES_PASSWORD" && exit 1;
+write_uwsgi() {
+    echo "Generating uwsgi config file..."
+    snippet="import os;
+import sys;
+import jinja2;
+sys.stdout.write(jinja2.Template(sys.stdin.read()).render(env=os.environ))"
+
+    cat /deployment/uwsgi.ini | python -c "${snippet}" > /uwsgi.ini
+}
 
 # Run
 case "$1" in
@@ -52,6 +71,7 @@ case "$1" in
     ;;
     uwsgi)
         echo "Running App (uWSGI)..."
+        write_uwsgi
         uwsgi --ini /uwsgi.ini
     ;;
     *)
