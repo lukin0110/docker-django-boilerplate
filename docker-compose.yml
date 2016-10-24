@@ -13,8 +13,8 @@ postgres:
 # Django app
 app:
     build: .
-    command: dev
-#    command: uwsgi
+#    command: dev
+    command: uwsgi
     ports:
       - 8000:8000
       - 8001:8001
@@ -32,3 +32,10 @@ app:
       - PGPASSWORD=docker
       - SECRET_KEY=JeffreyLebowski
       - WSGI_MODULE=hello.wsgi:application
+
+web:
+    build: nginx
+    ports:
+      - 80:80
+    links:
+      - app:app

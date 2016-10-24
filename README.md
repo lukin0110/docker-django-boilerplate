@@ -35,6 +35,13 @@ Launch:
 $ docker-compose up app
 ```
 
+Launch Nginx:
+```
+$ docker-compose up web
+```
+
+*Now your django app is available on http://localhost*
+
 ## Container commands
 
 The image has 
