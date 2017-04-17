@@ -1,6 +1,7 @@
 # Docker Django Boilerplate
 
-Minimal setup for a Django project with Docker. This repo contains 
+Minimal setup for a Django project with Docker, following 
+[the 12factor app](https://12factor.net/) principles. This repo contains 
 skeleton code to get up and running with Docker & Django quickly. The 
 image uses [uWSGI](https://uwsgi-docs.readthedocs.io/) to host the 
 Django project. It's up to you to put Nginx or Apache in front in 
@@ -62,7 +63,7 @@ Available commands:
 | lint      | Run pylint                                                                      |
 | python    | Run a python command                                                            |
 | shell     | Start a Django Python shell                                                     |
-| uwsgi     | Run uwsgi server                                                                 |
+| uwsgi     | Run uwsgi server                                                                |
 | help      | Show this message                                                               |
 
 ### Create a Django app

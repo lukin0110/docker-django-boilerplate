@@ -90,6 +90,7 @@ ENV/
 
 # JetBrains
 .idea
+.DS_Store
 
 # PostreSQL Data
 data
