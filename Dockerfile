@@ -25,7 +25,7 @@ RUN pip install -r /deployment/requirements.txt
 COPY deployment/docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN dos2unix /usr/local/bin/docker-entrypoint.sh && \
     chmod a+x /usr/local/bin/docker-entrypoint.sh
-ENTRYPOINT ["docker-entrypoint.sh"]
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
 # Add the project source
 COPY app .
