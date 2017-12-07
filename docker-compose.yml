@@ -1,42 +1,44 @@
-# PostgreSQL
-postgres:
-    image: postgres:9.6.0
-    ports:
-      - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
-    volumes:
-      - ./pgdata:/var/lib/postgresql/data
-    environment:
-      - LC_ALL=C.UTF-8
-      - POSTGRES_PASSWORD=docker
-      - POSTGRES_USER=docker
+version: '2'
+services:
+  # PostgreSQL
+  postgres:
+      image: postgres:9.6.0
+      ports:
+        - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
+      volumes:
+        - ./pgdata:/var/lib/postgresql/data
+      environment:
+        - LC_ALL=C.UTF-8
+        - POSTGRES_PASSWORD=docker
+        - POSTGRES_USER=docker
 
-# Django app
-app:
-    build: .
-#    command: dev
-    command: uwsgi
-    ports:
-      - 8000:8000
-      - 8001:8001
-    volumes:
-      - ./app:/usr/src/app
-    links:
-      - postgres:postgres
-    environment:
-      - DEBUG=True
-      - PORT=8000
-      - POSTGRES_DB_NAME=hello
-      - POSTGRES_PORT_5432_TCP_ADDR=postgres
-      - POSTGRES_PORT_5432_TCP_PORT=5432
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - PGPASSWORD=docker
-      - SECRET_KEY=JeffreyLebowski
-      - WSGI_MODULE=hello.wsgi:application
+  # Django app
+  app:
+      build: .
+  #    command: dev
+      command: uwsgi
+      ports:
+        - 8000:8000
+        - 8001:8001
+      volumes:
+        - ./app:/usr/src/app
+      links:
+        - postgres
+      environment:
+        - DEBUG=True
+        - PORT=8000
+        - POSTGRES_DB_NAME=hello
+        - POSTGRES_PORT_5432_TCP_ADDR=postgres
+        - POSTGRES_PORT_5432_TCP_PORT=5432
+        - POSTGRES_USER=docker
+        - POSTGRES_PASSWORD=docker
+        - PGPASSWORD=docker #this is needed to autofill the password field for creating the db
+        - SECRET_KEY=JeffreyLebowski
+        - WSGI_MODULE=hello.wsgi:application
 
-web:
-    build: nginx
-    ports:
-      - 80:80
-    links:
-      - app:app
+  web:
+      build: nginx
+      ports:
+        - 80:80
+      links:
+        - app
