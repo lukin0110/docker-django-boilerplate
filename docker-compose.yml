@@ -9,8 +9,8 @@ services:
         - ./pgdata:/var/lib/postgresql/data
       environment:
         - LC_ALL=C.UTF-8
-        - POSTGRES_PASSWORD=docker
         - POSTGRES_USER=docker
+        - POSTGRES_PASSWORD=dockerPassword
 
   # Django app
   app:
@@ -22,7 +22,7 @@ services:
         - 8001:8001
       volumes:
         - ./app:/usr/src/app
-      links:
+      depends_on:
         - postgres
       environment:
         - DEBUG=True
@@ -31,8 +31,8 @@ services:
         - POSTGRES_PORT_5432_TCP_ADDR=postgres
         - POSTGRES_PORT_5432_TCP_PORT=5432
         - POSTGRES_USER=docker
-        - POSTGRES_PASSWORD=docker
-        - PGPASSWORD=docker #this is needed to autofill the password field for creating the db
+        - POSTGRES_PASSWORD=dockerPassword
+        - PGPASSWORD=dockerPassword #this is needed to autofill the password field for creating the db
         - SECRET_KEY=JeffreyLebowski
         - WSGI_MODULE=hello.wsgi:application
 
@@ -40,5 +40,5 @@ services:
       build: nginx
       ports:
         - 80:80
-      links:
+      depends_on:
         - app
