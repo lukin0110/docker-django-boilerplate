@@ -38,6 +38,7 @@ def handle(project_name):
     # Rename the 'hello' dir to 'your_project'
     os.rename("app/hello", "app/{0}".format(project_name))
 
+
 if __name__ == "__main__":
     name = raw_input("Project name: ")
     handle(name)

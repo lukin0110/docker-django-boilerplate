@@ -17,6 +17,7 @@ from __future__ import print_function
 from django.conf import settings
 from django.conf.urls import url
 from django.contrib import admin
+from django.urls import include, path
 
 # Custom admin header
 admin.site.site_header = 'Hello Administration'
@@ -30,3 +31,10 @@ if settings.IS_WSGI:
     print("uWSGI mode, adding static file patterns")
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
     urlpatterns += staticfiles_urlpatterns()
+
+# Add debug toolbar
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns
