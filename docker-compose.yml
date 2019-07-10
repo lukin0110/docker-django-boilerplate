@@ -1,8 +1,10 @@
-version: '2'
+version: '3'
+
 services:
   # PostgreSQL
   postgres:
-      image: postgres:9.6.0
+      image: postgres:11.4
+      hostname: postgres
       ports:
         - 5432:5432 # Bind host port 5432 to PostgreSQL port 5432
       volumes:
@@ -10,12 +12,14 @@ services:
       environment:
         - LC_ALL=C.UTF-8
         - POSTGRES_USER=docker
-        - POSTGRES_PASSWORD=dockerPassword
+        - POSTGRES_PASSWORD=docker
 
   # Django app
   app:
-      build: .
-  #    command: dev
+      build:
+        context: .
+        dockerfile: ./services/app/Dockerfile
+      # command: dev
       command: uwsgi
       ports:
         - 8000:8000
@@ -24,6 +28,8 @@ services:
         - ./app:/usr/src/app
       depends_on:
         - postgres
+      links:
+        - postgres:postgres
       environment:
         - DEBUG=True
         - PORT=8000
@@ -31,13 +37,15 @@ services:
         - POSTGRES_PORT_5432_TCP_ADDR=postgres
         - POSTGRES_PORT_5432_TCP_PORT=5432
         - POSTGRES_USER=docker
-        - POSTGRES_PASSWORD=dockerPassword
-        - PGPASSWORD=dockerPassword #this is needed to autofill the password field for creating the db
+        - POSTGRES_PASSWORD=docker
+        - PGPASSWORD=docker #this is needed to autofill the password field for creating the db
         - SECRET_KEY=JeffreyLebowski
         - WSGI_MODULE=hello.wsgi:application
 
   web:
-      build: nginx
+      build:
+        context: ./
+        dockerfile: ./services/nginx/Dockerfile
       ports:
         - 80:80
       depends_on:
