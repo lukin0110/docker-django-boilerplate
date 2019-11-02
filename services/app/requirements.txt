@@ -1,4 +1,4 @@
-Django==2.2.3               # A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
+Django==2.2.4               # A high-level Python Web framework that encourages rapid development and clean, pragmatic design.
 django-debug-toolbar==2.0   # A configurable set of panels that display various debug information about the current request/response.
 psycopg2==2.8.3             # Python-PostgreSQL Database Adapter
 uwsgi==2.0.18               # The uWSGI Server
