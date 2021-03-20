@@ -2,7 +2,7 @@ Django==2.2.3               # A high-level Python Web framework that encourages 
 django-debug-toolbar==2.0   # A configurable set of panels that display various debug information about the current request/response.
 psycopg2==2.8.3             # Python-PostgreSQL Database Adapter
 uwsgi==2.0.18               # The uWSGI Server
-Jinja2==2.10.1              # A small but fast and easy to use stand-alone template engine written in pure python.
+Jinja2==2.11.3              # A small but fast and easy to use stand-alone template engine written in pure python.
 
 # Linting
 pylint==2.3.1               # python code static checker
